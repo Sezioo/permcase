@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
+import com.sezioo.permission.beans.LocalHolder;
 import com.sezioo.permission.beans.PageQuery;
 import com.sezioo.permission.beans.PageResult;
 import com.sezioo.permission.dao.SysUserMapper;
@@ -38,7 +39,7 @@ public class SysUserService {
 				.status(param.getStatus()).remark(param.getRemark()).password(encryptedpassword).build();
 		//TODO:发送邮件
 		
-		user.setOperator("system");//TODO:
+		user.setOperator(LocalHolder.getUser().getUsername());
 		user.setOperateIp("127.0.0.1");//TODO:
 		user.setOperateTime(new Date());
 		userMapper.insertSelective(user);
@@ -56,6 +57,9 @@ public class SysUserService {
 		Preconditions.checkNotNull(before, "用户不存在");
 		SysUser after = SysUser.builder().id(param.getId()).username(param.getUsername()).telephone(param.getTelephone()).mail(param.getMail()).deptId(param.getDeptId())
 				.status(param.getStatus()).remark(param.getRemark()).build();
+		after.setOperator(LocalHolder.getUser().getUsername());
+		after.setOperateIp("127.0.0.1");//TODO:
+		after.setOperateTime(new Date());
 		userMapper.updateByPrimaryKeySelective(after);
 		
 	}

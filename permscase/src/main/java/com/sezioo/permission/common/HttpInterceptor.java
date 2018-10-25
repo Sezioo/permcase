@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import com.sezioo.permission.beans.LocalHolder;
 import com.sezioo.permission.util.JsonMapper;
 
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +30,7 @@ public class HttpInterceptor extends HandlerInterceptorAdapter{
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
+		LocalHolder.remove();
 		super.postHandle(request, response, handler, modelAndView);
 	}
 
@@ -37,6 +39,7 @@ public class HttpInterceptor extends HandlerInterceptorAdapter{
 			throws Exception {
 		long currentTimeMillis = System.currentTimeMillis();
 		long start = (long) request.getAttribute(START_TIME);
+		LocalHolder.remove();
 		log.info("requestURI {} end.  cost {}  ms", request.getRequestURI(),currentTimeMillis-start);
 		super.afterCompletion(request, response, handler, ex);
 	}
