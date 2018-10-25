@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd"> 
+<configuration>
+
+	<!-- org.apache.ibatis.session.Configuration.class -->
+	<settings>
+		<setting name="safeRowBoundsEnabled" value="true"/>
+		<setting name="cacheEnabled" value="false"/>
+		<setting name="useGeneratedKeys" value="true"/>
+		<setting name="logPrefix" value="dao."/>
+	</settings>
+	<mappers>
+		<package name="com.sezioo.permission.dao"/>
+	</mappers>
+	
+	<!-- <typeAliases>
+	
+	</typeAliases> -->
+	
+	<!-- <plugins>
+		
+	</plugins> -->
+	
+	<!-- <typeHandlers>
+		
+	</typeHandlers> -->
+</configuration>
